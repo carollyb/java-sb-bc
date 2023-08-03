@@ -2,6 +2,8 @@ package com.example.bootcampibm.controller;
 
 import com.example.bootcampibm.domain.Cliente;
 import com.example.bootcampibm.domain.Produto;
+import com.example.bootcampibm.dto.ClienteDTO;
+import com.example.bootcampibm.dto.ProdutoDTO;
 import com.example.bootcampibm.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +29,23 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Produto>> find(@PathVariable Integer id) {
+    public ResponseEntity<Produto> find(@PathVariable Integer id) {
 
-        Optional<Produto> produto = service.find(id);
+        Produto produto = service.find(id);
         return ResponseEntity.ok().body(produto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@RequestBody ProdutoDTO dto, @PathVariable Integer id) {
+        Produto obj = service.fromDto(dto);
+        obj.setId(id);
+        service.update(obj);
+        return ResponseEntity.noContent().build();
     }
 }
