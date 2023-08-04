@@ -1,6 +1,7 @@
 package com.example.bootcampibm.dto;
 
 import com.example.bootcampibm.domain.Cliente;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Setter
 @Getter
 public class ClienteDTO implements Serializable {
@@ -20,4 +22,5 @@ public class ClienteDTO implements Serializable {
         nome = obj.getNome();
         email = obj.getEmail();
     }
+
 }
